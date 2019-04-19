@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ভাড়া.বাংলা</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--    <link rel="stylesheet" href="../assets/css/materialize.min.css">-->
+    <link rel="stylesheet" href="../assets/css/jquery_mobile.min.css">
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/jquery_mobile.min.js"></script>
+    <link rel="stylesheet" href="../assets/css/mobileCustomSmall.css" media="screen and (max-width: 320px)">
+
+    <link rel="stylesheet" href="../assets/css/mobileCustom.css" media="screen and (min-width: 321px) and (max-width: 767px)">
+
+    <link rel="stylesheet" href="../assets/css/desktop.css" media="screen and (min-width: 768px) and (max-width : 1224px)">
+
+    <link rel="stylesheet" href="../assets/css/desktopLarge.css" media="screen and (min-width : 1225px) and (max-width : 1824px)">
+
+    <style>
+        .totalUnPubAdvNo {
+            font-size: 1rem;
+        }
+        
+        .userLogNo {
+            font-size: 1rem;
+        }
+        
+        .totalPubAdvNo {
+            font-size: 1rem;
+        }
+        
+        .userNo {
+            font-size: 1rem;
+        }
+        /*
+ td { border: 1px solid gray; } th { border: 1px solid gray; }
+*/
+        
+        #customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        #customers td,
+        #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            /*            min-width: 200px;*/
+            font-size: 0.694rem;
+        }
+        
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+        /*
+        table {
+            table-layout: fixed;
+        }
+        
+        td {
+            word-wrap: break-word
+        }
+*/
+        
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .sm {
+            width: 70px;
+        }
+        
+        .mid {
+            width: 130px;
+        }
+        
+        .big {
+            width: 200px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div data-role="page" id="homepage">
+
+        <div data-role="header">
+            <div class="navBar">
+                <div class="navBarWrap" style="display: flex; ">
+                    <div class="users" style="margin:0.355rem  1rem;">
+                        Admin
+                    </div>
+                    <div class="users" style="margin:0.355rem  1rem; cursor: pointer;">
+                        Users
+                    </div>
+                    <div class="openions" style="margin:0.355rem  1rem; cursor: pointer;">
+                        Openion (<span class="openionsCount"></span>)
+                    </div>
+                </div>
+            </div>
+            <div class="dashBoard" style="display: flex;justify-content: space-between; padding: 1rem; background-color: white;">
+                <div class="totalUsers totalWrap" style="background-color: rgb(34, 151, 247);">
+                    <div class="userHead">মোট ব্যবহারকারী</div>
+                    <div class="userNo"></div>
+                </div>
+                <div class="totalPubAdv totalWrap" style="background-color: rgb(77, 177, 81);">
+                    <div class="userHead">প্রকাশিত বিজ্ঞাপন</div>
+                    <div class="totalPubAdvNo"></div>
+                </div>
+                <div class="totalUnPubAdv totalWrap" style="background-color:rgb(244, 66, 54);">
+                    <div class="userHead">অপ্রকাশিত বিজ্ঞাপন</div>
+                    <div class="totalUnPubAdvNo"></div>
+                </div>
+                <div class="totalLogInUser totalWrap" style="background-color: rgb(255, 152, 1);">
+                    <div class="userHead">লগডইন ব্যবহারকারী</div>
+                    <div class="userLogNo"></div>
+                </div>
+            </div>
+        </div>
+
+        <!--
+   
+            adv_id
+            headline
+            address
+            address1
+            address2
+            localAdd
+            category
+            sub_cat
+            feat_1
+            feat_2
+            feat_3
+            feat_4
+            price
+            pricePeriod
+            img
+            details
+            date_time
+            userid
+            userName
+            mobile
+            email
+            nego
+            lat
+            lng
+            publish
+            Action
+       
+-->
+
+        <div role="main" class="ui-content">
+            <div class="mainWrap" style="margin: 1rem; overflow-x:auto;">
+
+
+            </div>
+        </div>
+        <div data-role="footer">foot</div>
+
+
+
+    </div>
+    <script>
+        $(document).ready(function() {
+
+            var totalPubAdvNo = '';
+            $.post('http://localhost/bhara/core/ajax/admin.php', {
+                userLogNo: totalPubAdvNo
+            }, function(data) {
+                $(".userLogNo").html(data);
+            });
+
+            $.post('http://localhost/bhara/core/ajax/admin.php', {
+                totalPubAdvNo: totalPubAdvNo
+            }, function(data) {
+                $(".totalPubAdvNo").html(data);
+            });
+
+            $.post('http://localhost/bhara/core/ajax/admin.php', {
+                totalUserNo: totalPubAdvNo
+            }, function(data) {
+                $(".userNo").html(data);
+            });
+            $.post('http://localhost/bhara/core/ajax/admin.php', {
+                totalUnPubAdvNo: totalPubAdvNo
+            }, function(data) {
+                $(".totalUnPubAdvNo").html(data);
+            });
+            $.post('http://localhost/bhara/core/ajax/admin.php', {
+                openionsCount: totalPubAdvNo
+            }, function(data) {
+                $(".openionsCount").html(data);
+            });
+
+
+            $(document).on("click", ".openions", function() {
+                $.post('http://localhost/bhara/core/ajax/admin.php', {
+                    openions: totalPubAdvNo
+                }, function(data) {
+                    $(".mainWrap").html(data);
+                });
+            });
+
+
+
+
+            $(document).on("click", ".actionSub", function() {
+                var tableVal = $(this).closest(".tableVal");
+                var adv_id = $(tableVal).find(".adv_id").val();
+                var headline = $(tableVal).find(".headline").val();
+                var address = $(tableVal).find(".address").val();
+                var address1 = $(tableVal).find(".address1").val();
+                var address2 = $(tableVal).find(".address2").val();
+                var localAdd = $(tableVal).find(".localAdd").val();
+                var category = $(tableVal).find(".category").val();
+                var sub_cat = $(tableVal).find(".sub_cat").val();
+                var feat_1 = $(tableVal).find(".feat_1").val();
+                var feat_2 = $(tableVal).find(".feat_2").val();
+                var feat_3 = $(tableVal).find(".feat_3").val();
+                var feat_4 = $(tableVal).find(".feat_4").val();
+                var price = $(tableVal).find(".price").val();
+                var pricePeriod = $(tableVal).find(".pricePeriod").val();
+                var img = $(tableVal).find(".img").val();
+                var details = $(tableVal).find(".details").val();
+                var date_time = $(tableVal).find(".date_time").val();
+                var userid = $(tableVal).find(".userid").val();
+                var userName = $(tableVal).find(".userName").val();
+                var mobile = $(tableVal).find(".mobile").val();
+                var email = $(tableVal).find(".email").val();
+                var nego = $(tableVal).find(".nego").val();
+                var lat = $(tableVal).find(".lat").val();
+                var lng = $(tableVal).find(".lng").val();
+                var publish = $(tableVal).find(".publish").val();
+
+                $.post('http://localhost/bhara/core/ajax/admin.php', {
+                    adv_id: adv_id,
+                    headline: headline,
+                    address: address,
+                    address1: address1,
+                    address2: address2,
+                    localAdd: localAdd,
+                    category: category,
+                    sub_cat: sub_cat,
+                    feat_1: feat_1,
+                    feat_2: feat_2,
+                    feat_3: feat_3,
+                    feat_4: feat_4,
+                    price: price,
+                    pricePeriod: pricePeriod,
+                    img: img,
+                    details: details,
+                    date_time: date_time,
+                    userid: userid,
+                    userName: userName,
+                    mobile: mobile,
+                    email: email,
+                    nego: nego,
+                    lat: lat,
+                    lng: lng,
+                    publish: publish
+                }, function(data) {
+                    //                    $(".mainWrap").html(data);
+                    location.reload();
+                });
+
+
+
+
+
+
+
+
+
+            });
+            $(document).on("click", ".totalUsers", function() {
+
+                var totalUser = '';
+                $.post('http://localhost/bhara/core/ajax/admin.php', {
+                    totalUser: totalUser
+                }, function(data) {
+                    $(".mainWrap").html(data);
+                });
+
+            });
+            $(document).on("click", ".totalLogInUser", function() {
+
+                var totalUser = '';
+                $.post('http://localhost/bhara/core/ajax/admin.php', {
+                    totalLogInUser: totalUser
+                }, function(data) {
+                    $(".mainWrap").html(data);
+                });
+
+            });
+            $(document).on("click", ".totalUnPubAdv", function() {
+
+                var totalUnPubAdv = '';
+                $.post('http://localhost/bhara/core/ajax/admin.php', {
+                    totalUnPubAdv: totalUnPubAdv
+                }, function(data) {
+                    $(".mainWrap").html(data);
+                });
+
+            });
+            $(document).on("click", ".totalPubAdv", function() {
+
+                var totalPubAdv = '';
+                $.post('http://localhost/bhara/core/ajax/admin.php', {
+                    totalPubAdv: totalPubAdv
+                }, function(data) {
+                    $(".mainWrap").html(data);
+                });
+
+            });
+            $(document).on("click", ".totalLogInUser", function() {
+
+                var totalLogInUser = '';
+                $.post('http://localhost/bhara/core/ajax/admin.php', {
+                    totalLogInUser: totalLogInUser
+                }, function(data) {
+                    $(".mainWrap").html(data);
+                });
+
+            });
+
+        });
+
+    </script>
+    <script src="../assets/js/inde.js" async></script>
+    <script src="../assets/js/message.js" async></script>
+
+
+
+
+</body>
+
+</html>
